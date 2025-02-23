@@ -113,19 +113,11 @@ export const FileUpload = ({ onUploadSuccess }) => {
     else return (bytes / 1048576).toFixed(1) + ' MB';
   };
 
-  const validateFile = (file) => {
-    if (file.size > MAX_FILE_SIZE) {
-      throw new Error(`File ${file.name} vượt quá giới hạn ${formatFileSize(MAX_FILE_SIZE)}`);
-    }
-  };
-
   const handleFileChange = async (e) => {
     const files = Array.from(e.target.files);
     setError(null);
 
     try {
-      files.forEach(validateFile);
-
       setSelectedFiles(prevFiles => [...prevFiles, ...files.map(file => ({
         file,
         preview: file.type.startsWith('image') 
